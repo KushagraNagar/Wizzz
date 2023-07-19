@@ -58,7 +58,7 @@ public class GameUI : MonoBehaviour
     void Update ()
     {
         // If we're playing the game and it's a time based game mode.
-        if(GameManager.inst.gameState == GameState.Playing && GameManager.inst.gameMode == GameModeType.TimeBased)
+        if(GameManager.inst.gameState == GameState.Playing && GameManager.inst.gameMode == GameModeType.Free4All)
         {
             int curTime = (int)GameManager.inst.TimeRemaining();
             headerText.text = curTime.ToString();

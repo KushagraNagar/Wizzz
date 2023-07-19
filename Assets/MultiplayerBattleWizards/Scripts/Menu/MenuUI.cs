@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -21,6 +22,7 @@ public class MenuUI : MonoBehaviour
     public Button settingsButton;
     public Button quitButton;
     public Button lobbyButton;
+    public Button mapEditorBtn;
 
     [Header("Screen Components")]
     public LobbyScreen lobbyScreen;
@@ -43,6 +45,14 @@ public class MenuUI : MonoBehaviour
 
     void Start ()
     {
+#if UNITY_EDITOR
+        quitButton.gameObject.SetActive(false);
+        mapEditorBtn.gameObject.SetActive(true);
+#else
+            quitButton.gameObject.SetActive(true);
+        mapEditorBtn.gameObject.SetActive(false);
+#endif
+
         // Disable network-based buttons.
         createGameButton.interactable = false;
         joinGameButton.interactable = false;
@@ -147,6 +157,11 @@ public class MenuUI : MonoBehaviour
     public void OnQuitButton ()
     {
         Application.Quit();
+    }
+    // Called when the "MapEditor" button gets pressed.
+    public void OnMapEditorButton()
+    {
+        SceneManager.LoadScene("MapEditor");
     }
 
     // Called when the "Lobby" button gets pressed.

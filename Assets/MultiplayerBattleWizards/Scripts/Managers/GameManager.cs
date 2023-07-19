@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
@@ -99,7 +100,7 @@ public class GameManager : MonoBehaviour
         if(gameState == GameState.Playing)
         {
             // Host checks win condition every frame if it's a Time Based game mode.
-            if(PhotonNetwork.isMasterClient && gameMode == GameModeType.TimeBased)
+            if(PhotonNetwork.isMasterClient && gameMode == GameModeType.Free4All)
             {
                 if(Time.time > startTime + timeLimit)
                     CheckWinCondition();
@@ -134,10 +135,10 @@ public class GameManager : MonoBehaviour
 
         switch(gameMode)
         {
-            case GameModeType.ScoreBased:
+            case GameModeType.CoOp:
                 winningScore = gmProp;
                 break;
-            case GameModeType.TimeBased:
+            case GameModeType.Free4All:
                 timeLimit = (float)gmProp;
                 break;
         }
@@ -164,10 +165,10 @@ public class GameManager : MonoBehaviour
 
         switch(gameMode)
         {
-            case GameModeType.ScoreBased:
+            case GameModeType.CoOp:
                 hasWon = winningPlayer.score >= winningScore;
                 break;
-            case GameModeType.TimeBased:
+            case GameModeType.Free4All:
                 hasWon = Time.time > startTime + timeLimit;
                 break;
         }
@@ -236,8 +237,8 @@ public enum GameState
 // The game mode dictates the win condition for the game.
 public enum GameModeType
 {
-    ScoreBased,         // First player to a specific score (kills) - wins.
-    TimeBased           // After a set duration, the player with the most kills wins.
+    CoOp,         // First player to a specific score (kills) - wins.
+    Free4All           // After a set duration, the player with the most kills wins.
 }
 
 // How the spells are given to the player in-game (not including pickups).

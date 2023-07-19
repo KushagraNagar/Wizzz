@@ -8,7 +8,8 @@ public class GameSettingsScreen : MonoBehaviour
     [Header("Maps")]
     public GameObject mapButtonPrefab;
     public RectTransform mapContainer;
-
+    public GameObject killsBtnContainer, timeBtnContainer;
+    public Button coOpBtn, free4AllBtn;
     private MenuUI menu;
 
     void Awake ()
@@ -25,6 +26,7 @@ public class GameSettingsScreen : MonoBehaviour
     void Start ()
     {
         LoadMaps();
+
     }
 
     // Loads in the map buttons.
@@ -60,10 +62,9 @@ public class GameSettingsScreen : MonoBehaviour
     public void OnGameModeKills (int kills)
     {
         ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
-        hash.Add("gamemode", (int)GameModeType.ScoreBased);
+        hash.Add("gamemode", (int)GameModeType.CoOp);
         hash.Add("gamemodeprop", kills);
         PhotonNetwork.room.SetCustomProperties(hash);
-
         // Go back to lobby.
         menu.SetScreen(MenuUI.MenuScreen.Lobby);
     }
@@ -73,11 +74,31 @@ public class GameSettingsScreen : MonoBehaviour
     public void OnGameModeTime (int time)
     {
         ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
-        hash.Add("gamemode", (int)GameModeType.TimeBased);
+        hash.Add("gamemode", (int)GameModeType.Free4All);
         hash.Add("gamemodeprop", time);
         PhotonNetwork.room.SetCustomProperties(hash);
-
         // Go back to lobby.
         menu.SetScreen(MenuUI.MenuScreen.Lobby);
+    }
+
+    // Called when a "_ Gamemode" button is pressed to change game mode.
+    // Sends over the gamemode in enum.
+    public void OnGamemodeModeChange(int mode)
+    {
+        //ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
+        //hash.Add("gamemode", (int)GameModeType.TimeBased);
+        //hash.Add("gamemodeprop", time);
+        //PhotonNetwork.room.SetCustomProperties(hash);
+
+        // Go back to lobby.
+        //menu.SetScreen(MenuUI.MenuScreen.Lobby);
+
+        //Coop is 0
+        //Free4All is 1
+        {
+            timeBtnContainer.SetActive(mode == 1); 
+            killsBtnContainer.SetActive(mode == 0);
+        }
+
     }
 }
