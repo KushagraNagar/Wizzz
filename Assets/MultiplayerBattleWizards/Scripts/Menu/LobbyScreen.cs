@@ -39,7 +39,7 @@ public class LobbyScreen : MonoBehaviour
         {
             ExitGames.Client.Photon.Hashtable hash = new ExitGames.Client.Photon.Hashtable();
             hash.Add("map", Resources.LoadAll<TextAsset>("Maps")[0].name);
-            hash.Add("gamemode", (int)GameModeType.ScoreBased);
+            hash.Add("gamemode", (int)GameModeType.CoOp);
             hash.Add("gamemodeprop", 5);
             PhotonNetwork.room.SetCustomProperties(hash);
         }
@@ -124,8 +124,8 @@ public class LobbyScreen : MonoBehaviour
 
         switch(gameMode)
         {
-            case GameModeType.ScoreBased: gameModeText = "First to " + gameModeProperty + " kills"; break;
-            case GameModeType.TimeBased:
+            case GameModeType.CoOp: gameModeText = "First to " + gameModeProperty + " kills"; break;
+            case GameModeType.Free4All:
             {
                 if(gameModeProperty >= 60) gameModeText = "Most kills in " + (gameModeProperty / 60) + " mins";
                 else gameModeText = "Most kills in " + gameModeProperty + " secs";

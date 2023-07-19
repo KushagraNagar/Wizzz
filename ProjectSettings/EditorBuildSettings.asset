@@ -5,13 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/MultiplayerBattleWizards/Scenes/Menu.unity
     guid: 732dea1848491324f8c2f05f844c0a5a
   - enabled: 1
     path: Assets/MultiplayerBattleWizards/Scenes/Game.unity
     guid: 7d7cd413ae033f04188f7b9cdabdb790
+  - enabled: 1
+    path: Assets/MultiplayerBattleWizards/Scenes/MapEditor.unity
+    guid: 0b46f686c7cf44c4bad333d01e3e6919
   m_configObjects: {}
